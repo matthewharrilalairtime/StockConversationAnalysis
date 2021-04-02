@@ -20,7 +20,7 @@ extension Endpoint {
         var components = URLComponents()
         components.scheme = "https"
         components.host = host
-        components.path = "/api/2/streams/symbol" + path
+        components.path = path
         components.queryItems = queryItems
 
         guard let url = components.url else {

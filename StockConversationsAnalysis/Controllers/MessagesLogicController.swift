@@ -14,15 +14,21 @@ protocol MessagesLogicControllerProtocol: class {
 
 final class MessagesLogicController: MessagesLogicControllerProtocol {
 
-    var networkController: NetworkControllerProtocol
+    let networkController: NetworkController
 
-    init(networkController: NetworkControllerProtocol) {
+    init(networkController: NetworkController) {
         self.networkController = networkController
     }
 
     func getMessages() -> AnyPublisher<Messages, Error> {
-        let endpoint = Endpoint.messages(symbol: "OCGN.json")
+        let endpoint = Endpoint.messages(symbol: "AAPL.json")
 
         return networkController.get(type: Messages.self, url: endpoint.url, headers: nil)
+    }
+
+    func getSymbols() -> AnyPublisher<[Symbol], Error> {
+        let endpoint = Endpoint.symbols()
+
+        return networkController.get(type: [Symbol].self, url: endpoint.url, headers: nil)
     }
 }
